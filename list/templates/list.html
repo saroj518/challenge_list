@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 25px;
+            background: #f7f9fc;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 25px;
+        }
+
+        /* LEFT PANEL */
+        .left-box {
+            width: 35%;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .challenge-card {
+            background: #fafafa;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            transition: 0.25s;
+            cursor: pointer;
+            border: 1px solid #e6e6e6;
+        }
+
+        .challenge-card:hover {
+            background: #eaf0ff;
+            border-color: #c7d6ff;
+            transform: translateY(-2px);
+        }
+
+        .challenge-card a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* RIGHT PANEL */
+        .right-box {
+            width: 65%;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .placeholder {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>CTF Challenges</h2>
+
+<div class="container">
+
+    <div class="left-box">
+        {% for challenge in challenges %}
+            <div class="challenge-card">
+                <a 
+                    hx-get="/{{ challenge.id }}/"
+                    hx-target="#detail"
+                    hx-swap="innerHTML">
+                    {{ challenge.title }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="detail" class="right-box">
+        <div class="placeholder">
+            <h3>⬅ Select a challenge</h3>
+            <p>Click a challenge from the left list to view details.</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
