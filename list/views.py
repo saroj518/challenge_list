@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from .models import Challenge, Solve
 from django.views.generic import ListView, DetailView
-
+from django.urls import reverse_lazy
 
 class ChallengeListView(ListView):
     model = Challenge
     template_name = 'list.html'
     context_object_name = 'challenges'
     
+
 class ChallengeDetailView(DetailView):
     model = Challenge
     template_name = 'detail.html'
